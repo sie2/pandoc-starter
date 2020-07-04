@@ -1,0 +1,182 @@
+% Custom LaTeX template, taking some parts of the eisvogel template plus some
+% extra tweaking
+
+\documentclass[a4paper,landscape]{article}
+\usepackage[a4paper,margin=0.7in,landscape]{geometry}
+
+\usepackage{tikz}
+\usepackage{enumitem}
+
+\usepackage{longtable}  % required for tables!!
+\usepackage{booktabs}
+\usepackage{titlesec}
+\usepackage{multicol}
+
+% Ugh, for some reason my LaTeX distro doesnt include tightlist..?
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Configure top-level section to be slightly smaller and good for cheatsheets
+\titleformat{\section}
+  {\fontsize{12}{14}\sc}{\thesection}{1em}{}
+
+
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+
+% A bunch of required packages
+% for hyperref turn off red links
+\usepackage[hidelinks]{hyperref}
+\usepackage{xcolor}
+\usepackage{framed}
+\usepackage{graphicx}
+\definecolor{shadecolor}{rgb}{1,0,0}
+
+% define where to look for graphics
+% \graphicspath{
+%     {cheatsheets/images}
+% }
+
+%
+% for the background color of the title page
+%
+$if(titlepage)$
+\usepackage{pagecolor}
+\usepackage{afterpage}
+$endif$
+
+
+%
+% TOC depth and 
+% section numbering depth
+%
+\setcounter{tocdepth}{3}
+$if(numbersections)$
+\setcounter{secnumdepth}{3}
+$endif$
+
+%
+% line spacing
+%
+\usepackage{setspace}
+%\setstretch{1.2}
+\setstretch{0.8}  % Closer line spacing is good
+
+%
+% break urls
+%
+\PassOptionsToPackage{hyphens}{url}
+
+%
+% blockquote - REDEFINE to use for quiz answers
+%
+\definecolor{blockquote-border}{RGB}{221,221,221}
+\definecolor{blockquote-text}{RGB}{119,119,119}
+\usepackage{mdframed}
+
+\newmdenv[rightline=false,bottomline=false,topline=false,linewidth=3pt,linecolor=blockquote-border,skipabove=\parskip]{customblockquote}
+\renewenvironment{quote}{\begin{customblockquote}\list{}{\rightmargin=0em\leftmargin=0em}%
+\item\relax\color{blockquote-text}\ignorespaces}{\unskip\unskip\endlist\end{customblockquote}}
+
+%
+% variables for title and author
+%
+\usepackage{titling}
+\title{$title$}
+\author{$for(author)$$author$$sep$, $endfor$}
+\date{}
+
+
+%
+% remove paragraph indention
+%
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+
+
+%
+% header and footer
+%
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{}
+\fancyfoot{}
+
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+  
+\lhead{$title$}
+\rhead{$topic$}
+
+\lfoot{$for(author)$$author$$sep$, $endfor$}
+\rfoot{$url$}
+
+
+\begin{document}
+
+%%%%%%%%%%% Cheatsheet multi-column stuff
+$if(twocolumns)$
+\begin{multicols*}{2}
+$else$
+$if(fourcolumns)$
+\begin{multicols*}{4}
+$else$
+\begin{multicols*}{3}
+$endif$
+$endif$
+%%%%%%%%%%%
+
+$if(maketitle)$
+\maketitle
+$endif$
+
+$if(toc)$
+\tableofcontents
+$endif$
+
+\thispagestyle{fancy}
+
+$body$
+
+%%%%%%%%%%% Cheatsheet multi-column stuff
+\end{multicols*}
+%%%%%%%%%%%
+
+$if(natbib)$
+$if(bibliography)$
+$if(biblio-title)$
+$if(book-class)$
+\renewcommand\bibname{$biblio-title$}
+$else$
+\renewcommand\refname{$biblio-title$}
+$endif$
+$endif$
+$if(beamer)$
+\begin{frame}[allowframebreaks]{$biblio-title$}
+\bibliographytrue
+$endif$
+\bibliography{$for(bibliography)$$bibliography$$sep$,$endfor$}
+$if(beamer)$
+\end{frame}
+$endif$
+
+$endif$
+$endif$
+$if(biblatex)$
+$if(beamer)$
+\begin{frame}[allowframebreaks]{$biblio-title$}
+\bibliographytrue
+\printbibliography[heading=none]
+\end{frame}
+$else$
+\printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
+$endif$
+
+$endif$
+$for(include-after)$
+$include-after$
+
+$endfor$
+\end{document}
