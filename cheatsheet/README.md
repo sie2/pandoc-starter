@@ -1,7 +1,7 @@
 # cheatsheet
 
 These starter files can be used for writing up cheatsheets for math or
-computer science classes. The template was modified from 
+computer science classes. The template was modified from [Cheatsheet Class].
 
 [Cheatsheet Class]: https://github.com/kickstartcoding/cheatsheets 
 
