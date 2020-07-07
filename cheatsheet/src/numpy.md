@@ -3,6 +3,7 @@ title: Python
 topic: NumPy
 author: Emerson Sie
 url: https://github.com/sie2
+landscape: true
 maketitle: false
 toc: false
 ...
@@ -91,7 +92,7 @@ Broadcasting rules:
 > (@) they are equal, or
 > (@) one of them is 1
 
-![Broadcasting](img/broadcasting.png "Voyage to the moon"){ width=30% }\
+![Broadcasting](img/broadcasting.png){ width=30% }\
 
 
 Array slicing:
@@ -137,14 +138,14 @@ np.matmul(a,b)              # matrix mult
 np.kron(a,b)                # kronecker product
 np.linalg.matrix_power(a,n) # matrix power
 np.linalg.svd(a)            # SVD
-np.linalg.eig(a)            # eigendecomposition
+np.linalg.eig(a)            # eigendecomp
 ```
 
 # Random {-}
 
 ```python
-np.random.rand(4,5)  # 4x5 array of floats in [0,1]
-np.random.randint(5, size=(2,3)) # random ints in [0,5)
+np.random.rand(4,5)  # 4x5 floats in [0,1]
+np.random.randint(5, size=(2,3)) # in [0,5)
 ```
 
 # Statistics {-}

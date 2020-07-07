@@ -3,6 +3,7 @@ title: Bash & Git
 topic: Useful CLI tricks for macOS and GNU/Linux
 author: Kickstart Coding
 url: https://kickstartcoding.com
+landscape: false
 maketitle: false
 toc: false
 ...

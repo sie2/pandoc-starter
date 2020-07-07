@@ -1,8 +1,13 @@
 % Custom LaTeX template, taking some parts of the eisvogel template plus some
 % extra tweaking
 
+$if(landscape)$
 \documentclass[a4paper,landscape]{article}
 \usepackage[a4paper,margin=0.7in,landscape]{geometry}
+$else$
+\documentclass[a4paper]{article}
+\usepackage[a4paper,margin=0.7in]{geometry}
+$endif$
 
 \usepackage{tikz}
 \usepackage{enumitem}
